@@ -29,7 +29,7 @@ Install Multipass using the native Mac OS [installer](https://github.com/Canonic
 
 ##### Linux
 
-Multipass can be installed with the following command on any [snap-enabled linux](https://snapcraft.io):
+Multipass can be installed with the following command on any [snap-enabled linux distribution](https://snapcraft.io):
 
 ```
 sudo snap install multipass --beta --classic
@@ -49,15 +49,28 @@ multipass mount . kubeflow:/multipass
 **Note**: These are the minimum recommended settings on the VM created by Multipass for the Kubeflow deployment. You are free to adjust them **higher** based on your host machine capabilities and workload requirements.
 
 
-#### Configure secret.env
+### Configure secret.env
 
 Create or use an existing (Github token)[https://github.com/settings/tokens].
 
 `touch secret.env`
-`echo "export GITHUB_TOKEN=<your Github token>" > secret.env`
+`echo "export GITHUB_TOKEN=<paste your Github token>" > secret.env`
 
 ### Install Kubernetes
-Log into the VM and install some basic supporting tools. This will install kubernetes, powered by microk8s, and other tools necessary to deploy Kubeflow
+
+Log into the VM and install some basic supporting tools. This will install kubernetes via microk8s, make, ksonnet, and kubeflow.
+
+##### Configure your app (optional)
+
+Set the following environment variables before running `install.sh` to configure your setup. If you choose not to provide them, the defaults below will be used.
+
+```
+export NAMESPACE=default # kubernetes namespace
+export APP_NAME=my-app
+export APP_DIR=/home/multipass/my-app
+export KUBEFLOW_TAG=v0.3.3
+export KUBEFLOW_SRC=/kubeflow
+```
 
 ```
 multipass shell kubeflow                      # log into vm
