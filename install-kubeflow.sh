@@ -33,7 +33,7 @@ ks registry add kubeflow github.com/kubeflow/kubeflow/tree/${VERSION}/kubeflow
 
 ks pkg install kubeflow/core@${VERSION}
 ks pkg install kubeflow/tf-serving@${VERSION}
-ks pkg install kubeflow/tf-job@${VERSION}
+ks pkg install kubeflow/tensorboard@${VERSION}
 
 # Create templates for core components
 ks generate kubeflow-core kubeflow-core
