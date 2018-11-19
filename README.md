@@ -2,8 +2,10 @@
 
 # Kubeflow Demo via MicroK8s
 
-`git clone git@github.com/leigh-johnson/kubeflow-microk8s-demo.git`
-`cd kubeflow-microk8s-demo`
+```
+git clone git@github.com/leigh-johnson/kubeflow-microk8s-demo.git
+cd kubeflow-microk8s-demo
+```
 
 ### What is Kubeflow?
 
@@ -16,7 +18,6 @@ This demo will focus on getting started locally with MicroK8s, using Multipass. 
 * [What is Kubernetes](https://kubernetes.io/docs/concepts/overview/what-is-kubernetes/)
 * [What is Multipass](https://github.com/CanonicalLtd/multipass)
 * [What is Microk8s?](https://microk8s.io/)
-
 
 
 ### Install Multipass

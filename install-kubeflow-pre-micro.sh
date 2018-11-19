@@ -31,17 +31,13 @@ iptables -P FORWARD ACCEPT
 ## KSONNET
 
 # Issue affecting prebuilt binaries <= 0.13.0 https://github.com/ksonnet/ksonnet/issues/883
+# instead, build from source in install-go.sh
 
 # wget https://github.com/ksonnet/ksonnet/releases/download/v0.13.0/ks_0.13.0_linux_amd64.tar.gz -O ksonnet.tar.gz
 # mkdir -p ksonnet
 # tar -xvf ksonnet.tar.gz -C ksonnet --strip-components=1
 # cp ksonnet/ks /usr/local/bin
 # rm -fr ksonnet
-
-# build ksonnet from source
-go get github.com/ksonnet/ksonnet
-cd $GOPATH/src/github.com/ksonnet/ksonnet
-make install
 
 until [[ `kubectl get pods -n=kube-system | grep -o 'ContainerCreating' | wc -l` == 0 ]] ; do 
   echo "Checking kube-system status until all pods are running ("`kubectl get pods -n=kube-system | grep -o 'ContainerCreating' | wc -l`" not running)"
