@@ -20,39 +20,24 @@ kubectl create namespace ${NAMESPACE}
 # Which version of Kubeflow to use
 # For a list of releases refer to:
 # https://github.com/kubeflow/kubeflow/releases
-VERSION=${VERSION:-v0.3.3}
+KUBEFLOW_TAG=${KUBEFLOW_TAG:-v0.3.3}
 
-# Initialize a ksonnet app. Set the namespace for it's default environment.
-APP_NAME=${APP_NAME:-my-kubeflow}
-ks init ${APP_NAME}
-cd ${APP_NAME}
-ks env set default --namespace ${NAMESPACE}
+KUBEFLOW_SRC=${KUBEFLOW_SRC:-/home/multipass/kubeflow}
+APP_NAME=${APP_NAME:-my-app}
+APP_DIR=${APP:-/home/multipass/my-app}
 
-# Install Kubeflow components
-ks registry add kubeflow github.com/kubeflow/kubeflow/tree/${VERSION}/kubeflow
+mkdir -p ${KUBEFLOW_SRC}
 
-ks pkg install kubeflow/core
-ks pkg install kubeflow/tf-serving
+curl https://raw.githubusercontent.com/kubeflow/kubeflow/${KUBEFLOW_TAG}/scripts/download.sh | bash
 
-# Create templates for core components
-ks generate kubeflow-core kubeflow-core
-
-# If your cluster is running on Azure you will need to set the cloud parameter.
-# If the cluster was created with AKS or ACS choose aks, it if was created
-# with acs-engine, choose acsengine
-# PLATFORM=<aks|acsengine>
-# ks param set kubeflow-core cloud ${PLATFORM}
-
-# Enable collection of anonymous usage metrics
-# Skip this step if you don't want to enable collection.
-ks param set kubeflow-core reportUsage true
-ks param set kubeflow-core usageId $(uuidgen)
-
+${KUBEFLOW_SRC}/scripts/kfctl.sh init ${APP_NAME} --platform none
 # For non-cloud use .. use NodePort (instead of ClusterIp)
-ks param set kubeflow-core jupyterHubServiceType NodePort
-
-# Deploy Kubeflow
-ks apply default -c kubeflow-core
+cd ${APP_DIR}
+${KUBEFLOW_SRC}/scripts/kfctl.sh generate k8s
+cd ks_app
+ks param set jupyterhub ServiceType NodePort
+cd ../
+${KUBEFLOW_SRC}/scripts/kfctl.sh apply k8s
 
 until [[ `kubectl get pods -n=kubeflow | grep -o 'ContainerCreating' | wc -l` == 0 ]] ; do 
   echo "Checking kubeflow status until all pods are running ("`kubectl get pods -n=kubeflow | grep -o 'ContainerCreating' | wc -l`" not running). Sleeping for 10 seconds."
