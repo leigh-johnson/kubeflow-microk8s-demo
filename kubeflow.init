@@ -1,0 +1,9 @@
+# cloud-init for kubeflow
+
+package_update: true
+package_upgrade: true
+
+runcmd:
+ - mkdir /kubeflow
+ - mkdir /home/multipass/work
+ - printf "\n\nsource /multipass/dev.env\n\n" >> /home/multipass/.bashrc
