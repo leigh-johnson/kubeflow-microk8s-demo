@@ -15,23 +15,24 @@ This demo will focus on getting started locally with MicroK8s, using Multipass. 
 
 ### Additional Concepts
 
-* [What is Kubernetes](https://kubernetes.io/docs/concepts/overview/what-is-kubernetes/)
-* [What is Multipass](https://github.com/CanonicalLtd/multipass)
+* [What is Kubernetes?](https://kubernetes.io/docs/concepts/overview/what-is-kubernetes/)
+* [What is Multipass?](https://github.com/CanonicalLtd/multipass)
 * [What is Microk8s?](https://microk8s.io/)
 
 
 ### Install Multipass
-If you do not already have a multipass installed, install a new one.
+
+If you do not already have multipass installed, follow the directions below.
 
 ##### Mac OS X
 Install Multipass using the native Mac OS [installer](https://github.com/CanonicalLtd/multipass/releases/download/2018.6.1/multipass-2018.6.1-full-Darwin-signed.zip).
 
 ##### Linux
 
-It can be installed with the following command on any [snap-enabled linux](https://snapcraft.io):
+Multipass can be installed with the following command on any [snap-enabled linux](https://snapcraft.io):
 
 ```
-$ sudo snap install multipass --beta --classic
+sudo snap install multipass --beta --classic
 ```
 
 ### Start an Ubuntu Virtual Machine
