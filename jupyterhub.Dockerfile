@@ -15,7 +15,11 @@ ENV LANG C.UTF-8
 
 # install Python + NodeJS with conda
 RUN npm install -g configurable-http-proxy && \
-  python3 -m pip install jupyterhub
+  python3 -m pip install jupyterhub \
+  jupyterhub-kubespawner==0.9.0 \
+  jupyterhub-dummyauthenticator \
+  jhub_remote_user_authenticator \
+  oauthenticator  --no-cache-dir 
 
 RUN rm -rf ~/.cache ~/.npm
 
