@@ -4,5 +4,4 @@ package_update: true
 package_upgrade: true
 
 runcmd:
- - mkdir /kubeflow
- - printf "\n\nsource /multipass/dev.env\n\n" >> /home/multipass/.bashrc
+ - printf "\n\nsource /home/multipass/demo/dev.env\n\n" >> /home/multipass/.bashrc

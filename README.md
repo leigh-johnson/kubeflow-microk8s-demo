@@ -43,7 +43,8 @@ You can mount a local volume into the VM. The second command mounts your the loc
 
 ```
 multipass launch bionic -n kubeflow -m 8G -d 40G -c 4 --cloud-init kubeflow.init && \
-multipass mount . kubeflow:/multipass
+multipass mount . kubeflow:/home/multipass/demo
+multipass mount ${PWD}/my-app kubeflow:/home/multipass/my-app
 ```
 
 **Note**: These are the minimum recommended settings on the VM created by Multipass for the Kubeflow deployment. You are free to adjust them **higher** based on your host machine capabilities and workload requirements.
@@ -67,15 +68,15 @@ Set the following environment variables before running `install.sh` to configure
 ```
 export NAMESPACE=default # kubernetes namespace
 export APP_NAME=my-app
-export APP_DIR=/home/multipass/my-app
+export APP_DIR=/home/multipass/demo/my-app
 export KUBEFLOW_TAG=v0.3.3
-export KUBEFLOW_SRC=/kubeflow
+export KUBEFLOW_SRC=/home/multimass/kubeflow
 ```
 
 ```
 multipass shell kubeflow                      # log into vm
-source /multipass/secret.env # set GITHUB_TOKEN environment variable in vm shell
-sudo /multipass/install.sh  # install microk8s, kubeflow etc.
+source /home/multipass/demo/secret.env # set GITHUB_TOKEN environment variable in vm shell
+sudo /home/multipass/install.sh  # install microk8s, kubeflow etc.
 ```
 
 ### Cleaning up

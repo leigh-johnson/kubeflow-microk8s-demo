@@ -24,18 +24,21 @@ KUBEFLOW_TAG=${KUBEFLOW_TAG:-v0.3.3}
 
 KUBEFLOW_SRC=${KUBEFLOW_SRC:-/home/multipass/kubeflow}
 APP_NAME=${APP_NAME:-my-app}
-APP_DIR=${APP:-/home/multipass/my-app}
+APP_DIR=${APP:-/home/multipass/demo/my-app}
 
 mkdir -p ${KUBEFLOW_SRC}
 
 curl https://raw.githubusercontent.com/kubeflow/kubeflow/${KUBEFLOW_TAG}/scripts/download.sh | bash
 
 ${KUBEFLOW_SRC}/scripts/kfctl.sh init ${APP_NAME} --platform none
-# For non-cloud use .. use NodePort (instead of ClusterIp)
 cd ${APP_DIR}
 ${KUBEFLOW_SRC}/scripts/kfctl.sh generate k8s
 cd ks_app
+# For non-cloud use .. use NodePort (instead of ClusterIp)
 ks param set jupyterhub ServiceType NodePort
+# https://github.com/kubeflow/kubeflow/issues/1367
+# use pip packaging for jupyterhub
+ks param set jupyterhub image leighjohnson/jupyterhub:latest
 cd ../
 ${KUBEFLOW_SRC}/scripts/kfctl.sh apply k8s
 

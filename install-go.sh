@@ -4,7 +4,7 @@ tar -xvf go1.11.2.linux-amd64.tar.gz
 echo "Removing go1.11.2.linux-amd64.tar.gz"
 rm go1.11.2.linux-amd64.tar.gz
 mkdir -p /home/multipass/work
-source /multipass/dev.env
+source /home/multipass/demo/dev.env
 
 
 echo "Installing ksonnet/ksonnet:master"
