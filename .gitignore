@@ -1,1 +1,3 @@
 secret.env
+my-app/*
+!my-app/.gitignore
