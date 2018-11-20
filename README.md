@@ -76,7 +76,7 @@ export KUBEFLOW_SRC=/home/multimass/kubeflow
 ```
 multipass shell kubeflow                      # log into vm
 source /home/multipass/demo/secret.env # set GITHUB_TOKEN environment variable in vm shell
-sudo /home/multipass/install.sh  # install microk8s, kubeflow etc.
+./demo/install.sh  # install microk8s, kubeflow etc.
 ```
 
 ### Cleaning up
